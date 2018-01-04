@@ -13,7 +13,7 @@ void print(int a[],int n,int i){
 	}
 	printf("\n");
 }
-void InsertSort(int a[],int n){
+void InsertSort1(int a[],int n){
 	int j,x;
 	j = x = 0;
 	for (int i = 1; i < n; ++i)		
@@ -32,10 +32,25 @@ void InsertSort(int a[],int n){
 		print(a,n,i);
 	}
 }
+void InsertSort2(int a[],int n){
+	for(int i = 1;i<n;i++){
+		if(a[i]>a[i-1]){
+			int j = i-1;
+			int x = a[i];
+			while(j>=0 && x>a[j]){
+				a[j+1] = a[j];
+				j--;
+			}
+			a[j+1] = x;
+		}
+		print(a,n,i);
+	}
+}
 int main(int argc, char const *argv[])
 {
 	/* code */
-	int a[8] = {8,7,6,5,4,3,2,1};
-	InsertSort(a,8);
+	int a[8] = {7,3,4,5,1,8,2,6};
+	InsertSort1(a,8);	//<
+	InsertSort2(a,8);	//>
 	return 0;
 }
