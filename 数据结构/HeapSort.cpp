@@ -33,5 +33,5 @@ void HeapSort(int a[],int n){
 int main(){
 	int a[] = {0,3,7,1,8,4,6,2,5};
 	HeapSort(a,8);
-	
+	print(a,8);
 } 

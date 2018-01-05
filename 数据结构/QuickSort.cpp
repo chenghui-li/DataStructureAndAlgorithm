@@ -10,28 +10,37 @@ void swap(int &a,int &b){
     a = b;
     b = temp;
 }
+int patition(int a[],int left,int right){
+	int i = left,j = right,temp;
+	while(i<j){
+		while(i<j && a[j]>=a[i])
+		    j--;
+		if(i<j){
+			swap(a[i],a[j]);
+			i++;
+		}
+			
+		while(i<j && a[i]<=a[j])
+		    i++;
+		if(i<j){
+			swap(a[i],a[j]);
+			j--;
+		}
+		    
+	}
+	print(a,8);
+	return i;
+}
 void QuickSort(int a[],int start,int end){
 	
     if(start>=end)
         return ;
-    int pivotkey = a[end];
-    int left = start;
-    int right = end-1;
-    while(left<right){
-        while(a[left]<pivotkey && left < right)
-            left++;
-        while(a[right]>=pivotkey && left < right)
-            right --;
-        swap(a[left],a[right]);
-    }
-    if(a[left] > a[end])
-        swap(a[left],a[end]);
-    else 
-        left ++;
-    print(a,8);
-    if(left)
-        QuickSort(a,start,left-1);
-    QuickSort(a,left+1,end);
+        
+	int pivot = patition(a,start,end);
+	QuickSort(a,start,pivot-1);
+	
+	QuickSort(a,pivot+1,end);
+	
 }
 int main(){
 	int a[] = {3,7,6,1,8,4,2,5};
