@@ -6,8 +6,8 @@ void print(int a[],int start,int end){
 	printf("\n");
 }
 void Merge(int a[],int start,int mid,int end){
-	int i = start,j = mid+1,k = start;
-	int r1[10];
+	int i = start,j = mid+1,k = 0;
+	int r1[end-start+1];
 	while(i<=mid && j <= end){
 		if(a[i]<a[j])
 		    r1[k++] = a[i++];
@@ -19,7 +19,7 @@ void Merge(int a[],int start,int mid,int end){
 	while(j<=end)
 	    r1[k++] = a[j++];
 	for(int i = start;i<=end;i++)
-	    a[i] = r1[i];
+	    a[i] = r1[i-start];
 	print(a,start,end);
 }
 void MerSort1(int a[],int start,int end){
@@ -31,8 +31,8 @@ void MerSort1(int a[],int start,int end){
 	Merge(a,start,mid,end);
 }
 void Merge2(int a[],int start,int mid,int end){
-	int i = start,j = mid+1,k = start;
-	int r1[10];
+	int i = start,j = mid+1,k = 0;
+	int r1[end-start+1];
 	while(i<=mid && j<=end){
 		if(a[i]>a[j])
 		    r1[k++] = a[i++];
@@ -44,7 +44,7 @@ void Merge2(int a[],int start,int mid,int end){
 	while(j<=end)
 	    r1[k++] = a[j++];
 	for(int i = start;i<=end;i++){
-		a[i] = r1[i];
+		a[i] = r1[i-start];
 	}
 	print(a,start,end);
 } 
