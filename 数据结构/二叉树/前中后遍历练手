@@ -1,0 +1,115 @@
+struct BiTree{
+	int val;
+	struct BiTree *left;
+	struct BiTree *right;
+};
+//前序遍历
+//递归
+void preOrder(struct BiTree *root){
+	if(root == nullptr)
+		return;
+	print(root->val);
+	preOrder(root->left);
+	preOrder(root->right);
+}
+//非递归
+void preOrder(struct BiTree *root){
+	struct BiTree *bt = root;
+	stack<BiTree *> s;
+	while(bt != nullptr || !s.empty()){
+		while(bt != nullptr){
+			print(bt->val);
+			s.push(bt);
+			bt = bt->left;
+		}
+		if(!s.empty()){
+			bt = s.top();
+			s.pop();
+			bt = bt->right;
+		}
+	}
+}
+//中序遍历
+//递归
+void midOrder(struct BiTree *root){
+	if(root == nullptr)
+		return;
+	midOrder(root->left);
+	print(root->val);
+	midOrder(root->right);
+}
+//非递归
+void midOrder(struct BiTree *root){
+	stack<BiTree *>s;
+	struct BiTree *bt = root;
+	while(bt != nullptr || !s.empty()){
+		while(bt != nullptr){
+			s.push(bt);
+			bt = bt->left;
+		}
+		if(!s.empty()){
+			bt = s.top();
+			s.pop();
+			print(bt->val);
+			bt = bt->right;
+		}
+	}
+
+}
+//后序遍历
+//递归
+void afterOrder(struct BiTree *root){
+	if(root == nullptr)
+		return;
+	afterOrder(root->left);
+	afterOrder(root->right);
+	print(root->val);
+}
+//非递归
+typedef struct bNode{
+	struct BiTree *node;
+	bool isFirst;
+}bNode;
+void afterOrder(struct BiTree *root){
+	stack <bNode*> s;
+	struct BiTree *bt = root;
+	struct bNode *temp;
+	while(bt != nullptr || !s.empty()){
+		while(bt != nullptr){
+			bNode *bn = new bNode();
+			bn->node = bt;
+			bn->isFirst = true;
+			s.push(bn);
+			bt = bt->left;
+		}
+		if(!s.empty()){
+			temp = s.top();
+			s.pop();
+			if(temp->isFirst == true){
+				temp->isFirst = false;
+				s.push(temp);
+				bt = temp->node->right;
+			}else{
+				print(temp->node->val);
+				bt = nullptr;
+			}
+		}
+	}
+}
+
+//层序遍历
+void levelOrder(struct BiTree *root){
+	if(root == nullptr)
+		return ;
+	queue<BiTree> q;
+	q.push(root);
+	while(!q.empty()){
+		struct BiTree *now = q.front();
+		q.pop();
+		print(now->val);
+		if(now->left != nullptr)
+			q.push(now->left);
+		if(now->right != nullptr)
+			q.push(now->right);
+	}
+}
